@@ -1,8 +1,5 @@
 package com.example.user.videopoker;
 
-/**
- * Created by user on 11/11/2016.
- */
 
 public enum HandRank {
     ROYAL_FLUSH,
