@@ -13,5 +13,6 @@ public enum HandRank {
     JACKS_OR_BETTER,
     PAIR_LESS_THAN_JACKS,
     JUNK,
-    IN_PROGRESS
+    IN_PROGRESS,
+    NOT_STARTED,
 }

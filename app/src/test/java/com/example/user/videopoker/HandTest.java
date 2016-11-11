@@ -15,11 +15,12 @@ public class HandTest {
     public void before() {
         testHand = new Hand();
         queenHearts = new Card(Suit.HEARTS, Rank.QUEEN);
+
     }
 
     @Test
     public void rankStartsAsNoPayout() {
-        assertEquals(HandRank.IN_PROGRESS, testHand.getRank());
+        assertEquals(HandRank.NOT_STARTED, testHand.getRank());
     }
 
     @Test

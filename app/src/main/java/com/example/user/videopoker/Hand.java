@@ -9,7 +9,7 @@ public class Hand {
     protected ArrayList<Card> cards;
 
     public Hand(){
-        this.handRank = null;
+        this.handRank = HandRank.NOT_STARTED;
         this.cards = new ArrayList<Card>();
     }
 
