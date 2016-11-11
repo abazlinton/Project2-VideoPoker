@@ -19,7 +19,7 @@ public class HandTest {
 
     @Test
     public void rankStartsAsNoPayout() {
-        assertEquals(HandRank.NO_PAYOUT, testHand.getRank());
+        assertEquals(HandRank.IN_PROGRESS, testHand.getRank());
     }
 
     @Test

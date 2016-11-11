@@ -9,16 +9,37 @@ public class HandRanker {
     Hand hand;
     ArrayList<Integer> countsAllCards;
     boolean jacksOrBetterPossible;
+    boolean cardsFormStraight;
+    boolean cardsFormFlush;
 
 
     public HandRanker(Hand hand){
         this.hand = hand;
         this.countsAllCards = new ArrayList<Integer>();
         this.jacksOrBetterPossible = false;
+        this.cardsFormStraight = false;
+        this.cardsFormFlush = false;
     }
 
     public void updateHandRanking(){
         checkForMultiples();
+        if (hand.getRank() == HandRank.IN_PROGRESS){
+            checkForStraightWhenNoMultiplesFound();
+            checkForFlush();
+        }
+        if (cardsFormFlush && cardsFormStraight && acePresent()) {
+           hand.setRank(HandRank.ROYAL_FLUSH);
+        }
+        if (cardsFormFlush && cardsFormStraight && !acePresent()) {
+           hand.setRank(HandRank.STRAIGHT_FLUSH);
+        }
+        if (cardsFormStraight && !cardsFormFlush) {
+            hand.setRank(HandRank.STRAIGHT);
+        }
+        if (!cardsFormStraight && cardsFormFlush) {
+            hand.setRank(HandRank.FLUSH);
+        }
+
     }
 
     public void checkForMultiples() {
@@ -50,7 +71,7 @@ public class HandRanker {
         Collections.reverse(countsAllCards);
 
         if (countsAllCards.get(0) == 1) {
-            hand.setRank(HandRank.NO_PAYOUT);
+            hand.setRank(HandRank.IN_PROGRESS);
         }
         else if (countsAllCards.get(0) == 4) {
             hand.setRank(HandRank.FOUR_OF_A_KIND);
@@ -71,7 +92,7 @@ public class HandRanker {
                 hand.setRank(HandRank.JACKS_OR_BETTER);
             }
             else {
-                hand.setRank(HandRank.NO_PAYOUT);
+                hand.setRank(HandRank.PAIR_LESS_THAN_JACKS);
             }
         }
     }
@@ -84,6 +105,53 @@ public class HandRanker {
         }
     }
 
+
+    //Todo - average make this more robust - middle value == average / halfway
+    private void checkForStraightWhenNoMultiplesFound(){
+        // This works because we already know we have no more than one of each card
+        // If we had A2235 this check would detect a straight
+
+        ArrayList<Integer> collectRanks = new ArrayList<Integer>();
+
+        for (Card card : hand.getCards()) {
+            collectRanks.add(getIntValueOfCard(card));
+        }
+        Collections.sort(collectRanks);
+        int lowCard = collectRanks.get(0);
+        int highCard = collectRanks.get(4);
+        if (highCard - lowCard == 4) {
+            cardsFormStraight = true;
+        }
+    }
+
+
+    private void checkForFlush(){}
+
+    private boolean acePresent(){
+        for (Card card : hand.getCards()) {
+            if (card.getRank() == Rank.ACE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean twoPresent(){
+        for (Card card : hand.getCards()) {
+            if (card.getRank() == Rank.TWO) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getIntValueOfCard(Card card){
+        if (card.getRank() == Rank.ACE && twoPresent()) {
+            return -1;
+        }
+        else return card.getRank().ordinal();
+
+    }
 
 
 }

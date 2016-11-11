@@ -11,5 +11,7 @@ public enum HandRank {
     THREE_OF_A_KIND,
     TWO_PAIR,
     JACKS_OR_BETTER,
-    NO_PAYOUT
+    PAIR_LESS_THAN_JACKS,
+    JUNK,
+    IN_PROGRESS
 }
