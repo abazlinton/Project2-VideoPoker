@@ -7,6 +7,26 @@ public class Hand {
 
     protected HandRank handRank;
     protected ArrayList<Card> cards;
+
+    public Hand(){
+        this.handRank = HandRank.NO_PAYOUT;
+        this.cards = new ArrayList<Card>();
+    }
+
+    public HandRank getRank(){
+        return this.handRank;
+
+    }
+
+    public void addCard( Card card ){
+        this.cards.add( card );
+    }
+
+    public ArrayList<Card> getCards(){
+        return cards;
+    }
+
+
 }
 
 

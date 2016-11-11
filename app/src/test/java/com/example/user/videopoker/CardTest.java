@@ -24,4 +24,6 @@ public class CardTest {
         assertEquals(Rank.KING, card.getRank());
     }
 
+
+
 }
