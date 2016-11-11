@@ -9,13 +9,16 @@ public class Hand {
     protected ArrayList<Card> cards;
 
     public Hand(){
-        this.handRank = HandRank.NO_PAYOUT;
+        this.handRank = null;
         this.cards = new ArrayList<Card>();
     }
 
     public HandRank getRank(){
         return this.handRank;
+    }
 
+    public void setRank(HandRank handRank){
+        this.handRank = handRank;
     }
 
     public void addCard( Card card ){

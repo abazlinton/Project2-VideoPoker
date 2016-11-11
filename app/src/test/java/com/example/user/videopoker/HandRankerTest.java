@@ -5,10 +5,6 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created by user on 11/11/2016.
- */
-
 public class HandRankerTest {
 
     Hand testHand;
@@ -38,8 +34,8 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        assertEquals(HandRank.NO_PAYOUT, handRanker.checkForMultiples()
-    );
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.NO_PAYOUT, testHand.getRank());
 }
 
     @Test
@@ -50,7 +46,8 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        assertEquals(HandRank.JACKS_OR_BETTER, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.JACKS_OR_BETTER, testHand.getRank());
     }
 
     @Test
@@ -61,7 +58,8 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        assertEquals(HandRank.JACKS_OR_BETTER, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.JACKS_OR_BETTER, testHand.getRank());
     }
 
     @Test
@@ -72,7 +70,8 @@ public class HandRankerTest {
         testHand.addCard(kingClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        assertEquals(HandRank.TWO_PAIR, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.TWO_PAIR, testHand.getRank());
     }
 
     @Test
@@ -83,7 +82,8 @@ public class HandRankerTest {
         testHand.addCard(jackClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        assertEquals(HandRank.THREE_OF_A_KIND, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.THREE_OF_A_KIND, testHand.getRank());
     }
 
     @Test
@@ -94,7 +94,8 @@ public class HandRankerTest {
         testHand.addCard(jackClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        assertEquals(HandRank.FULL_HOUSE, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.FULL_HOUSE, testHand.getRank());
     }
 
     @Test
@@ -105,7 +106,8 @@ public class HandRankerTest {
         testHand.addCard(twoClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(aceClubs);
-        assertEquals(HandRank.FOUR_OF_A_KIND, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.FOUR_OF_A_KIND, testHand.getRank());
     }
 
     @Test
@@ -116,7 +118,8 @@ public class HandRankerTest {
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
         testHand.addCard(twoClubs);
-        assertEquals(HandRank.NO_PAYOUT, handRanker.checkForMultiples());
+        handRanker.updateHandRanking();
+        assertEquals(HandRank.NO_PAYOUT, testHand.getRank());
     }
 
 
