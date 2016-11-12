@@ -9,23 +9,19 @@ public class Deck {
 
     public Deck() {
         this.cards = new ArrayList<Card>();
-        this.make();
+        this.resetWithShuffle();
     }
 
     public int size() {
         return cards.size();
     }
 
-    public Card getCardAt(int index) {
-        return cards.get(index);
-    }
+    public void resetNoShuffle() {
 
-    public Card pick() {
-        int position = Rand.get(0, (size() - 1));
-        return cards.remove(position);
-    }
+        if (!cards.isEmpty()) {
+                cards.clear();
+        }
 
-    private void make() {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 Card card = new Card(suit, rank);
@@ -34,7 +30,20 @@ public class Deck {
         }
     }
 
-    public void shuffle(){
+    public void resetWithShuffle(){
+        resetNoShuffle();
+        shuffle();
+    }
+
+    public ArrayList<Card> deal(int dealSize){
+        ArrayList<Card> returnCards = new ArrayList<>();
+        for (int i=0; i < dealSize; i++) {
+            returnCards.add(cards.remove(0));
+        }
+        return returnCards;
+    }
+
+    private void shuffle(){
         Collections.shuffle(cards);
     }
 

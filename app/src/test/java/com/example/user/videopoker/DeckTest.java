@@ -3,11 +3,9 @@ package com.example.user.videopoker;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import java.util.ArrayList;
 
-/**
- * Created by user on 11/11/2016.
- */
+import static junit.framework.Assert.assertEquals;
 
 public class DeckTest {
 
@@ -25,25 +23,20 @@ public class DeckTest {
     }
 
     @Test
-    public void checkCard13Is2D() {
-        Card compareCard = new Card( Suit.DIAMONDS, Rank.TWO );
-        assertEquals( compareCard.getSuit(), deck.getCardAt(13).getSuit() );
-        assertEquals( compareCard.getRank(), deck.getCardAt(13).getRank() );
+    public void canBeDealtCards() {
+        assertEquals( Card.class, deck.deal(5).get(0).getClass() );
     }
 
     @Test
-    public void pickReturnsACard() {
-        assertEquals( Card.class, deck.pick().getClass() );
+    public void dealtRightNoOfCards(){
+        ArrayList<Card> returnedCards = deck.deal(5);
+        assertEquals(5, returnedCards.size());
     }
 
-//    @Test
-//    public void testShuffle() {
-//        //will fail 1/13 times - confirmed
-//        Card testCard = deck.getCardAt(0);
-//        deck.shuffle();
-//        Card shuffledCard = deck.getCardAt(0);
-//        boolean testChange = (testCard.getRank() != shuffledCard.getRank());
-//        assertEquals(true, testChange);
-//    }
-
+    @Test
+    public void deckCanBeReset(){
+        deck.deal(20);
+        deck.resetNoShuffle();
+        assertEquals(52, deck.size());
+    }
 }
