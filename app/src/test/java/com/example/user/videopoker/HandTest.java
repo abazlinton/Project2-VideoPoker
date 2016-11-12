@@ -37,34 +37,34 @@ public class HandTest {
        assertEquals(Rank.QUEEN, testHand.getCards().get(0).getRank());
     }
 
-    @Test
-    public void canSortByRankAceHigh() {
-        testHand.addCard(fourDiamonds);
-        testHand.addCard(queenClubs);
-        testHand.addCard(kingClubs);
-        testHand.addCard(aceClubs);
-        testHand.addCard(twoClubs);
-    }
-
-    @Test
-    public void canSortByRankAceLow() {
-        testHand.addCard(fourDiamonds);
-        testHand.addCard(queenClubs);
-        testHand.addCard(kingClubs);
-        testHand.addCard(aceClubs);
-        testHand.addCard(twoClubs);
-    }
-
-    @Test
-    public void testToString(){
-        testHand.addCard(fourDiamonds);
-        testHand.addCard(queenClubs);
-        testHand.addCard(kingClubs);
-        testHand.addCard(aceClubs);
-        testHand.addCard(twoClubs);
-        assertEquals("Ac Kc Qc 4d 2c", testHand.toString());
-
-    }
+//    @Test
+//    public void canSortByRankAceHigh() {
+//        testHand.addCard(fourDiamonds);
+//        testHand.addCard(queenClubs);
+//        testHand.addCard(kingClubs);
+//        testHand.addCard(aceClubs);
+//        testHand.addCard(twoClubs);
+//    }
+//
+//    @Test
+//    public void canSortByRankAceLow() {
+//        testHand.addCard(fourDiamonds);
+//        testHand.addCard(queenClubs);
+//        testHand.addCard(kingClubs);
+//        testHand.addCard(aceClubs);
+//        testHand.addCard(twoClubs);
+//    }
+//
+//    @Test
+//    public void testToString(){
+//        testHand.addCard(fourDiamonds);
+//        testHand.addCard(queenClubs);
+//        testHand.addCard(kingClubs);
+//        testHand.addCard(aceClubs);
+//        testHand.addCard(twoClubs);
+//        assertEquals("Ac Kc Qc 4d 2c", testHand.toString());
+//
+//    }
 
 
 
