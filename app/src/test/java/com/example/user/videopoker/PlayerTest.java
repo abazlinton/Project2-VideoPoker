@@ -3,6 +3,8 @@ package com.example.user.videopoker;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -40,6 +42,56 @@ public class PlayerTest {
         player.setHand(testHand);
         assertEquals(5, player.getHand().size());
     }
+
+    @Test
+    public void playerCanToggleHOLD(){
+        player.toggleHold(1);
+        player.toggleHold(3);
+        player.toggleHold(1);
+        assertEquals(false, player.getHolds().get(1).booleanValue());
+        assertEquals(true, player.getHolds().get(3).booleanValue());
+    }
+
+    @Test
+    public void playerHasNoHoldsAtStart(){
+        assertEquals(false, player.getHolds().get(0).booleanValue());
+        assertEquals(false, player.getHolds().get(1).booleanValue());
+        assertEquals(false, player.getHolds().get(2).booleanValue());
+        assertEquals(false, player.getHolds().get(3).booleanValue());
+        assertEquals(false, player.getHolds().get(4).booleanValue());
+    }
+
+    @Test
+    public void canGetCountOfHolds(){
+        player.toggleHold(1);
+        player.toggleHold(3);
+        assertEquals(2, player.getHoldCount());
+    }
+
+    @Test
+    public void canIncreaseCredit(){
+        player.increaseCredit(10);
+        assertEquals(510, player.getCredit());
+    }
+
+    @Test
+    public void canDecreaseCredit(){
+        player.decreaseCredit(10);
+        assertEquals(490, player.getCredit());
+    }
+
+    @Test
+    public void playerHoldsCanBeReset(){
+        player.toggleHold(1);
+        player.toggleHold(3);
+        player.resetHolds();
+        assertEquals(false, player.getHolds().get(0).booleanValue());
+        assertEquals(false, player.getHolds().get(1).booleanValue());
+        assertEquals(false, player.getHolds().get(2).booleanValue());
+        assertEquals(false, player.getHolds().get(3).booleanValue());
+        assertEquals(false, player.getHolds().get(4).booleanValue());
+    }
+
 
 
 }
