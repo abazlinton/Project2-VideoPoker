@@ -15,6 +15,9 @@ public class HandTest {
     Card kingClubs;
     Card aceClubs;
     Card twoClubs;
+    Card threeClubs;
+    Card fourClubs;
+
 
     @Before
     public void before() {
@@ -32,6 +35,24 @@ public class HandTest {
     public void canAddcard(){
        testHand.addCard(queenHearts);
        assertEquals(Rank.QUEEN, testHand.getCards().get(0).getRank());
+    }
+
+    @Test
+    public void canSortByRankAceHigh() {
+        testHand.addCard(fourDiamonds);
+        testHand.addCard(queenClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(aceClubs);
+        testHand.addCard(twoClubs);
+    }
+
+    @Test
+    public void canSortByRankAceLow() {
+        testHand.addCard(fourDiamonds);
+        testHand.addCard(queenClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(aceClubs);
+        testHand.addCard(twoClubs);
     }
 
     @Test

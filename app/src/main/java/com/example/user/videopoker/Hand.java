@@ -25,11 +25,32 @@ public class Hand {
         this.cards.add( card );
     }
 
-    public ArrayList<Card> getCards(){
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
+    public boolean containsAce() {
+        for (Card card : this.cards){
+            if (card.getRank() == Rank.ACE){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public boolean containsTwo() {
+        for (Card card : this.cards){
+            if (card.getRank() == Rank.TWO){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
 
 

@@ -28,10 +28,10 @@ public class HandRanker {
             checkForFlush();
         }
 
-        if (cardsFormFlush && cardsFormStraight && acePresent()) {
+        if (cardsFormFlush && cardsFormStraight && handPassed.containsAce()) {
            handPassed.setRank(HandRank.ROYAL_FLUSH);
         }
-        if (cardsFormFlush && cardsFormStraight && !acePresent()) {
+        if (cardsFormFlush && cardsFormStraight && !handPassed.containsAce()) {
            handPassed.setRank(HandRank.STRAIGHT_FLUSH);
         }
         if (cardsFormStraight && !cardsFormFlush) {
@@ -145,26 +145,8 @@ public class HandRanker {
         }
     }
 
-    private static boolean acePresent(){
-        for (Card card : handPassed.getCards()) {
-            if (card.getRank() == Rank.ACE) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean twoPresent(){
-        for (Card card : handPassed.getCards()) {
-            if (card.getRank() == Rank.TWO) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static int getIntValueOfCard(Card card){
-        if (card.getRank() == Rank.ACE && twoPresent()) {
+        if (card.getRank() == Rank.ACE && handPassed.containsTwo()) {
             return -1;
         }
         else return card.getRank().ordinal();
