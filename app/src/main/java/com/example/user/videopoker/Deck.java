@@ -1,6 +1,7 @@
 package com.example.user.videopoker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
 
@@ -31,6 +32,10 @@ public class Deck {
                 this.cards.add(card);
             }
         }
+    }
+
+    public void shuffle(){
+        Collections.shuffle(cards);
     }
 
 }

@@ -10,6 +10,11 @@ public class HandTest {
 
     Hand testHand;
     Card queenHearts;
+    Card fourDiamonds;
+    Card queenClubs;
+    Card kingClubs;
+    Card aceClubs;
+    Card twoClubs;
 
     @Before
     public void before() {
@@ -29,6 +34,16 @@ public class HandTest {
        assertEquals(Rank.QUEEN, testHand.getCards().get(0).getRank());
     }
 
+    @Test
+    public void testToString(){
+        testHand.addCard(fourDiamonds);
+        testHand.addCard(queenClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(aceClubs);
+        testHand.addCard(twoClubs);
+        assertEquals("Ac Kc Qc 4d 2c", testHand.toString());
+
+    }
 
 
 

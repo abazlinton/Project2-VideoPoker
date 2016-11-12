@@ -36,4 +36,14 @@ public class DeckTest {
         assertEquals( Card.class, deck.pick().getClass() );
     }
 
+//    @Test
+//    public void testShuffle() {
+//        //will fail 1/13 times - confirmed
+//        Card testCard = deck.getCardAt(0);
+//        deck.shuffle();
+//        Card shuffledCard = deck.getCardAt(0);
+//        boolean testChange = (testCard.getRank() != shuffledCard.getRank());
+//        assertEquals(true, testChange);
+//    }
+
 }

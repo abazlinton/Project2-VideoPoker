@@ -20,6 +20,20 @@ public class Card {
     public Rank getRank(){
         return this.rank;
     }
+
+    @Override
+    public String toString() {
+        String stringRank = "";
+        String stringSuit = "";
+        if (rank.ordinal() < 8) {
+            stringRank = Integer.toString(rank.ordinal() + 2);
+        }
+        else {
+            stringRank = (String) rank.toString().substring(0,1);
+        }
+        stringSuit = suit.toString().substring(0,1).toLowerCase();
+        return stringRank + stringSuit;
+    }
 }
 
 

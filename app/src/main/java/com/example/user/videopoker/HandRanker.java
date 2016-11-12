@@ -22,10 +22,12 @@ public class HandRanker {
         cardsFormFlush = false;
 
         checkForMultiples();
+
         if (handPassed.getRank() == HandRank.IN_PROGRESS){
             checkForStraightWhenNoMultiplesFound();
             checkForFlush();
         }
+
         if (cardsFormFlush && cardsFormStraight && acePresent()) {
            handPassed.setRank(HandRank.ROYAL_FLUSH);
         }
@@ -107,7 +109,6 @@ public class HandRanker {
         }
     }
 
-
     //Todo - average make this more robust - middle value == average / halfway
     private static void checkForStraightWhenNoMultiplesFound(){
         // This works because we already know we have no more than one of each card
@@ -126,7 +127,6 @@ public class HandRanker {
         }
     }
 
-
     private static void checkForFlush(){
         ArrayList<Integer> suitCount = new ArrayList<Integer>();
         for (int i = 0; i < 4; i++){
@@ -143,8 +143,6 @@ public class HandRanker {
         if (suitCount.get(0) == 5){
             cardsFormFlush = true;
         }
-
-
     }
 
     private static boolean acePresent(){
@@ -170,8 +168,5 @@ public class HandRanker {
             return -1;
         }
         else return card.getRank().ordinal();
-
     }
-
-
 }
