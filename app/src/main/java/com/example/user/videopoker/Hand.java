@@ -17,6 +17,10 @@ public class Hand {
         return this.handRank;
     }
 
+    public int size(){
+        return cards.size();
+    }
+
     public void setRank(HandRank handRank){
         this.handRank = handRank;
     }
