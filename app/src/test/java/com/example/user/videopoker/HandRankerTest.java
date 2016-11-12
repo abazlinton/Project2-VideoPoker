@@ -9,6 +9,7 @@ public class HandRankerTest {
 
     Hand testHand;
     Card jackHearts;
+    Card jackClubs;
     Card queenClubs;
     Card kingClubs;
     Card aceClubs;
@@ -18,6 +19,7 @@ public class HandRankerTest {
     Card fourDiamonds;
     Card fiveSpades;
     Card twoDiamonds;
+    Card nineClubs;
 
     @Before
     public void before() {
@@ -32,153 +34,204 @@ public class HandRankerTest {
         fourDiamonds = new Card(Suit.DIAMONDS, Rank.FOUR);
         fiveSpades = new Card(Suit.SPADES, Rank.FIVE);
         twoDiamonds = new Card(Suit.DIAMONDS, Rank.TWO);
+        jackClubs = new Card(Suit.CLUBS, Rank.JACK);
+        nineClubs = new Card(Suit.CLUBS, Rank.NINE);
     }
 
     @Test
     public void testPairTens() {
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(tenClubs);
         testHand.addCard(tenClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(jackHearts);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.PAIR_LESS_THAN_JACKS, testHand.getRank());
 }
 
     @Test
     public void testPairJacks(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(jackHearts);
         testHand.addCard(jackHearts);
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JACKS_OR_BETTER, testHand.getRank());
     }
 
     @Test
     public void testPairQueens(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(queenClubs);
         testHand.addCard(tenClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(jackHearts);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JACKS_OR_BETTER, testHand.getRank());
     }
 
     @Test
     public void testTwoPairQQJJ(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(jackHearts);
         testHand.addCard(jackHearts);
         testHand.addCard(kingClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.TWO_PAIR, testHand.getRank());
     }
 
     @Test
     public void testTwoPair22JJ(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(twoClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(jackHearts);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.TWO_PAIR, testHand.getRank());
     }
 
     @Test
     public void testThreeJacks(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(jackHearts);
         testHand.addCard(jackHearts);
         testHand.addCard(jackHearts);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.THREE_OF_A_KIND, testHand.getRank());
     }
 
     @Test
     public void testJacksFullOfQueens(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(jackHearts);
         testHand.addCard(jackHearts);
         testHand.addCard(jackHearts);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.FULL_HOUSE, testHand.getRank());
     }
 
     @Test
     public void testFourTwos(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(twoClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(jackHearts);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.FOUR_OF_A_KIND, testHand.getRank());
     }
 
     @Test
     public void testJunk(){
-        HandRanker handRanker = new HandRanker(testHand);
-        testHand.addCard(jackHearts);
+      
+        testHand.addCard(fourDiamonds);
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
         testHand.addCard(twoClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JUNK, testHand.getRank());
     }
 
     @Test
     public void testOffSuitStraight(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(jackHearts);
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
         testHand.addCard(tenClubs);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.STRAIGHT, testHand.getRank());
     }
 
     @Test
     public void testAceLowStraight(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(aceClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(threeHearts);
         testHand.addCard(fourDiamonds);
         testHand.addCard(fiveSpades);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.STRAIGHT, testHand.getRank());
     }
 
     @Test
     public void testStraightNotDetectedByMistake(){
-        HandRanker handRanker = new HandRanker(testHand);
+      
         testHand.addCard(aceClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(twoDiamonds);
         testHand.addCard(fourDiamonds);
         testHand.addCard(fiveSpades);
-        handRanker.updateHandRanking();
+        HandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.PAIR_LESS_THAN_JACKS, testHand.getRank());
 
     }
-    
+
+    @Test
+    public void testStandardFlush(){
+      
+        testHand.addCard(aceClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(queenClubs);
+        testHand.addCard(twoClubs);
+        testHand.addCard(tenClubs);
+        HandRanker.updateHandRanking(testHand);
+        assertEquals(HandRank.FLUSH, testHand.getRank());
+    }
+
+    @Test
+    public void testRoyalFlush(){
+      
+        testHand.addCard(aceClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(queenClubs);
+        testHand.addCard(jackClubs);
+        testHand.addCard(tenClubs);
+        HandRanker.updateHandRanking(testHand);
+        assertEquals(HandRank.ROYAL_FLUSH, testHand.getRank());
+    }
+
+    @Test
+    public void testStraightFlush(){
+      
+        testHand.addCard(nineClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(queenClubs);
+        testHand.addCard(jackClubs);
+        testHand.addCard(tenClubs);
+        HandRanker.updateHandRanking(testHand);
+        assertEquals(HandRank.STRAIGHT_FLUSH, testHand.getRank());
+    }
+
+    @Test
+    public void testCannotLoopStraight(){
+      
+        testHand.addCard(twoClubs);
+        testHand.addCard(aceClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(queenClubs);
+        testHand.addCard(jackHearts);
+        HandRanker.updateHandRanking(testHand);
+        assertEquals(HandRank.JUNK, testHand.getRank());
+    }
+
+
 
 
 

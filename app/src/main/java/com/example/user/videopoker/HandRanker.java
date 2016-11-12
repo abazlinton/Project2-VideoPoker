@@ -6,43 +6,45 @@ import java.util.HashMap;
 
 public class HandRanker {
 
-    Hand hand;
-    ArrayList<Integer> countsAllCards;
-    boolean jacksOrBetterPossible;
-    boolean cardsFormStraight;
-    boolean cardsFormFlush;
+    private static Hand handPassed;
+    private static ArrayList<Integer> countsAllCards;
+    private static boolean jacksOrBetterPossible;
+    private static boolean cardsFormStraight;
+    private static boolean cardsFormFlush;
 
+    public static void updateHandRanking(Hand hand){
 
-    public HandRanker(Hand hand){
-        this.hand = hand;
-        this.countsAllCards = new ArrayList<Integer>();
-        this.jacksOrBetterPossible = false;
-        this.cardsFormStraight = false;
-        this.cardsFormFlush = false;
-    }
+        handPassed = hand;
 
-    public void updateHandRanking(){
+        countsAllCards = new ArrayList<Integer>();
+        jacksOrBetterPossible = false;
+        cardsFormStraight = false;
+        cardsFormFlush = false;
+
         checkForMultiples();
-        if (hand.getRank() == HandRank.IN_PROGRESS){
+        if (handPassed.getRank() == HandRank.IN_PROGRESS){
             checkForStraightWhenNoMultiplesFound();
             checkForFlush();
         }
         if (cardsFormFlush && cardsFormStraight && acePresent()) {
-           hand.setRank(HandRank.ROYAL_FLUSH);
+           handPassed.setRank(HandRank.ROYAL_FLUSH);
         }
         if (cardsFormFlush && cardsFormStraight && !acePresent()) {
-           hand.setRank(HandRank.STRAIGHT_FLUSH);
+           handPassed.setRank(HandRank.STRAIGHT_FLUSH);
         }
         if (cardsFormStraight && !cardsFormFlush) {
-            hand.setRank(HandRank.STRAIGHT);
+            handPassed.setRank(HandRank.STRAIGHT);
         }
         if (!cardsFormStraight && cardsFormFlush) {
-            hand.setRank(HandRank.FLUSH);
+            handPassed.setRank(HandRank.FLUSH);
         }
 
+        if (handPassed.getRank() == HandRank.IN_PROGRESS){
+            handPassed.setRank(HandRank.JUNK);
+        }
     }
 
-    public void checkForMultiples() {
+    private static void checkForMultiples() {
 
         for (int i = 0; i < 13; i++) {
             countsAllCards.add(0);
@@ -50,7 +52,7 @@ public class HandRanker {
 
         HashMap<String, Integer> countsInHand = new HashMap<>();
 
-        for (Card card : hand.getCards()) {
+        for (Card card : handPassed.getCards()) {
             int currentCount = 1;
             String key = card.getRank().toString();
             int index = card.getRank().ordinal();
@@ -71,33 +73,33 @@ public class HandRanker {
         Collections.reverse(countsAllCards);
 
         if (countsAllCards.get(0) == 1) {
-            hand.setRank(HandRank.IN_PROGRESS);
+            handPassed.setRank(HandRank.IN_PROGRESS);
         }
         else if (countsAllCards.get(0) == 4) {
-            hand.setRank(HandRank.FOUR_OF_A_KIND);
+            handPassed.setRank(HandRank.FOUR_OF_A_KIND);
         }
         else if (countsAllCards.get(0) == 3){
             if (countsAllCards.get(1) == 2) {
-                hand.setRank(HandRank.FULL_HOUSE);
+                handPassed.setRank(HandRank.FULL_HOUSE);
             }
             else {
-                hand.setRank(HandRank.THREE_OF_A_KIND);
+                handPassed.setRank(HandRank.THREE_OF_A_KIND);
             }
         }
         else if (countsAllCards.get(0) == 2){
             if (countsAllCards.get(1) == 2) {
-                hand.setRank(HandRank.TWO_PAIR);
+                handPassed.setRank(HandRank.TWO_PAIR);
             }
             else if (jacksOrBetterPossible) {
-                hand.setRank(HandRank.JACKS_OR_BETTER);
+                handPassed.setRank(HandRank.JACKS_OR_BETTER);
             }
             else {
-                hand.setRank(HandRank.PAIR_LESS_THAN_JACKS);
+                handPassed.setRank(HandRank.PAIR_LESS_THAN_JACKS);
             }
         }
     }
 
-    private void calculateIfjacksOrBetterPossible(){
+    private static void calculateIfjacksOrBetterPossible(){
         for (int i = 9; i < 13; i++) {
             if (countsAllCards.get(i) == 2) {
                 jacksOrBetterPossible = true;
@@ -107,13 +109,13 @@ public class HandRanker {
 
 
     //Todo - average make this more robust - middle value == average / halfway
-    private void checkForStraightWhenNoMultiplesFound(){
+    private static void checkForStraightWhenNoMultiplesFound(){
         // This works because we already know we have no more than one of each card
         // If we had A2235 this check would detect a straight
 
         ArrayList<Integer> collectRanks = new ArrayList<Integer>();
 
-        for (Card card : hand.getCards()) {
+        for (Card card : handPassed.getCards()) {
             collectRanks.add(getIntValueOfCard(card));
         }
         Collections.sort(collectRanks);
@@ -125,10 +127,28 @@ public class HandRanker {
     }
 
 
-    private void checkForFlush(){}
+    private static void checkForFlush(){
+        ArrayList<Integer> suitCount = new ArrayList<Integer>();
+        for (int i = 0; i < 4; i++){
+            suitCount.add(0);
+        }
+        for (Card card : handPassed.getCards()) {
+            int index = card.getSuit().ordinal();
+            int currentCount = suitCount.get(index);
+            currentCount++;
+            suitCount.set(index, currentCount);
+        }
+        Collections.sort(suitCount);
+        Collections.reverse(suitCount);
+        if (suitCount.get(0) == 5){
+            cardsFormFlush = true;
+        }
 
-    private boolean acePresent(){
-        for (Card card : hand.getCards()) {
+
+    }
+
+    private static boolean acePresent(){
+        for (Card card : handPassed.getCards()) {
             if (card.getRank() == Rank.ACE) {
                 return true;
             }
@@ -136,8 +156,8 @@ public class HandRanker {
         return false;
     }
 
-    private boolean twoPresent(){
-        for (Card card : hand.getCards()) {
+    private static boolean twoPresent(){
+        for (Card card : handPassed.getCards()) {
             if (card.getRank() == Rank.TWO) {
                 return true;
             }
@@ -145,7 +165,7 @@ public class HandRanker {
         return false;
     }
 
-    private int getIntValueOfCard(Card card){
+    private static int getIntValueOfCard(Card card){
         if (card.getRank() == Rank.ACE && twoPresent()) {
             return -1;
         }
