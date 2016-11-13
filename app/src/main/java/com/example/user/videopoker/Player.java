@@ -16,11 +16,10 @@ public class Player {
     public Player() {
         this.setCredit(0);
         this.holds = new HashMap<Integer, Boolean>();
-        resetHolds();
     }
 
     public void resetHolds() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < getHandSize(); i++) {
             this.holds.put(i, false);
         }
     }
@@ -40,6 +39,7 @@ public class Player {
 
     public void setHand(Hand hand) {
         this.hand = hand;
+        resetHolds();
     }
 
     public int getCredit() {
@@ -47,7 +47,7 @@ public class Player {
     }
 
     public int getHandSize() {
-        return hand.size();
+        return hand.getCards().size();
     }
 
     public int getHoldCount() {
@@ -73,26 +73,17 @@ public class Player {
         increaseCredit(change * -1);
     }
 
-    public int spacesInHand() {
-        return getHandSize() - getHoldCount();
+    public int cardsReqToRefillTo(int goal) {
+        return goal - getHoldCount();
     }
 
     public void addNewCards(ArrayList<Card> newCards) {
 
-        if (newCards.size() != spacesInHand()) {
-            throw new IllegalArgumentException("Player does not have space in hand for this many cards");
-        }
-        HandRank handRank = HandRank.NOT_YET_RANKED;
-        Hand newHand = new Hand(handRank);
-        int holdsKey = 0;
-        for (Card handCard : hand.getCards()) {
+        for (int holdsKey=0; holdsKey < getHandSize(); holdsKey++) {
             if (holds.get(holdsKey) == false) {
-                newHand.addCard(newCards.remove(0));
-            } else {
-                newHand.addCard(handCard);
+                hand.setCardAtIndexTo(holdsKey, newCards.remove(0));
             }
-            holdsKey++;
         }
-        setHand(newHand);
+        int i=0;
     }
 }

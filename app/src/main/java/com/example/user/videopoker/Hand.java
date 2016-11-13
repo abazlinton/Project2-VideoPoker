@@ -29,6 +29,10 @@ public class Hand {
         this.cards.add( card );
     }
 
+    public void setCardAtIndexTo(int index, Card card){
+        this.cards.set(index, card);
+    }
+
     public void addCards(ArrayList<Card> cards){
         for (Card card : cards){
             addCard(card);

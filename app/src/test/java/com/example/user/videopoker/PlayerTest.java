@@ -111,15 +111,15 @@ public class PlayerTest {
     public void getNumberOfSpacesInHand(){
         player.toggleHold(1);
         player.toggleHold(3);
-        assertEquals(3, player.spacesInHand());
+        assertEquals(3, player.cardsReqToRefillTo(5));
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void cannotAddMoreCardsThanSpaceInHand(){
-        ArrayList<Card> testCard = new ArrayList<Card>();
-        testCard.add(tenClubs);
-        player.addNewCards(testCard);
-    }
+//    @Test (expected = IllegalArgumentException.class)
+//    public void cannotAddMoreCardsThanSpaceInHand(){
+//        ArrayList<Card> testCard = new ArrayList<Card>();
+//        testCard.add(tenClubs);
+//        player.addNewCards(testCard);
+//    }
 
 
     @Test
@@ -129,7 +129,7 @@ public class PlayerTest {
         player.toggleHold(1);
         Deck deck = new Deck();
         ArrayList<Card> newCards = new ArrayList<Card>();
-        newCards = deck.deal(player.spacesInHand());
+        newCards = deck.deal(player.cardsReqToRefillTo(5));
         player.addNewCards(newCards);
         Card newCard0 = player.getHand().getCards().get(0);
         boolean card0EqualCheck = (origCard0 == newCard0);

@@ -2,7 +2,6 @@ package com.example.user.videopoker;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
@@ -32,6 +31,14 @@ public class DeckTest {
         ArrayList<Card> returnedCards = deck.deal(5);
         assertEquals(5, returnedCards.size());
     }
+
+//    @Test
+//    public void testCardOneWithMock(){
+//        Deck deckMock = mock(Deck.class);
+//        deckMock.size();
+//        int i=0;
+//
+//    }
 
     @Test
     public void deckCanBeReset(){
