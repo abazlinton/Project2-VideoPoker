@@ -58,24 +58,28 @@ public class GameTest {
     public void canFinalizeRound(){
         game.startNewRound();
         game.processSpinOne();
-        String handString = " Hand dealt ";
-        for (Card card: player.getHand().getCards()){
-            handString += card.toString() + " ";
-        }
-        System.out.println(handString);
-        player.toggleHold(1);
+//        String handString = " Dealt ";
+//        for (Card card: player.getHand().getCards()){
+//            handString += card.toString() + " ";
+//        }
+//        System.out.println(handString);
+//        System.out.println(player.getHand().getRank().toString());
+//        player.toggleHold(1);
+//        player.toggleHold(2);
         game.doSpinTwo();
-        handString = " Final hand ";
+        game.processSpinTwo();
+        String handString = " Final ";
         for (Card card: player.getHand().getCards()){
             handString += card.toString() + " ";
         }
         System.out.println(handString);
-        game.processSpinTwo();
+        System.out.println(player.getHand().getRank().toString());
+        System.out.println(player.getHand().getRank().getPayout());
     }
 
 
     @Test
-    public void canChargeplayer(){
+    public void payoutCorrrect(){
 
     }
 
