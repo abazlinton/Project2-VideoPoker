@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Hand {
 
-    protected HandRank handRank;
-    protected ArrayList<Card> cards;
+    private HandRank handRank;
+    private ArrayList<Card> cards;
 
     public Hand(){
         this.handRank = HandRank.NOT_STARTED;

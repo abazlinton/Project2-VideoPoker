@@ -24,18 +24,18 @@ public class HandRankerTest {
     @Before
     public void before() {
         testHand = new Hand();
-        jackHearts = new Card(Suit.HEARTS, Rank.JACK);
-        queenClubs = new Card(Suit.CLUBS, Rank.QUEEN);
-        kingClubs = new Card(Suit.CLUBS, Rank.KING);
-        aceClubs = new Card(Suit.CLUBS, Rank.ACE);
-        tenClubs = new Card(Suit.CLUBS, Rank.TEN);
-        twoClubs = new Card(Suit.CLUBS, Rank.TWO);
-        threeHearts = new Card(Suit.HEARTS, Rank.THREE);
-        fourDiamonds = new Card(Suit.DIAMONDS, Rank.FOUR);
-        fiveSpades = new Card(Suit.SPADES, Rank.FIVE);
-        twoDiamonds = new Card(Suit.DIAMONDS, Rank.TWO);
-        jackClubs = new Card(Suit.CLUBS, Rank.JACK);
-        nineClubs = new Card(Suit.CLUBS, Rank.NINE);
+        jackHearts = new Card(Rank.JACK, Suit.HEARTS);
+        queenClubs = new Card(Rank.QUEEN, Suit.CLUBS);
+        kingClubs = new Card(Rank.KING, Suit.CLUBS);
+        aceClubs = new Card(Rank.ACE, Suit.CLUBS);
+        tenClubs = new Card(Rank.TEN, Suit.CLUBS);
+        twoClubs = new Card(Rank.TWO, Suit.CLUBS);
+        threeHearts = new Card(Rank.THREE, Suit.HEARTS);
+        fourDiamonds = new Card(Rank.FOUR, Suit.DIAMONDS);
+        fiveSpades = new Card(Rank.FIVE, Suit.SPADES);
+        twoDiamonds = new Card(Rank.TWO, Suit.DIAMONDS);
+        jackClubs = new Card(Rank.JACK, Suit.CLUBS);
+        nineClubs = new Card(Rank.NINE, Suit.CLUBS);
     }
 
     @Test

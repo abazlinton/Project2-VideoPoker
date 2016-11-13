@@ -11,7 +11,7 @@ public class CardTest {
 
     @Before
     public void before() {
-        card = new Card(Suit.HEARTS, Rank.KING);
+        card = new Card(Rank.KING, Suit.HEARTS);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class CardTest {
 
     @Test
     public void testToString2d() {
-        card2 = new Card(Suit.DIAMONDS, Rank.TWO);
+        card2 = new Card(Rank.TWO, Suit.DIAMONDS);
         assertEquals("2d", card2.toString());
     }
 
@@ -37,7 +37,7 @@ public class CardTest {
 
     @Test
     public void testToStringTd() {
-        card2 = new Card(Suit.DIAMONDS, Rank.TEN);
+        card2 = new Card(Rank.TEN, Suit.DIAMONDS);
         assertEquals("Td", card2.toString());
     }
 

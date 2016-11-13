@@ -24,7 +24,7 @@ public class Deck {
 
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                Card card = new Card(suit, rank);
+                Card card = new Card(rank, suit);
                 this.cards.add(card);
             }
         }

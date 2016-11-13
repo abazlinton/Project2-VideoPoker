@@ -15,21 +15,34 @@ public class PlayerTest {
 
     Player player;
     Hand testHand;
-    Card jackClubs;
+    Card twoClubs;
     Card queenClubs;
     Card kingClubs;
     Card tenClubs;
+    Card aceClubs;
+    Card twoDiamonds;
     Card nineClubs;
+    Card jackClubs;
 
     @Before
     public void before(){
         player = new Player();
         testHand = new Hand();
-        testHand.addCard(nineClubs);
-        testHand.addCard(kingClubs);
+        queenClubs = new Card(Rank.QUEEN, Suit.CLUBS);
+        kingClubs = new Card(Rank.KING, Suit.CLUBS);
+        aceClubs = new Card(Rank.ACE, Suit.CLUBS);
+        tenClubs = new Card(Rank.TEN, Suit.CLUBS);
+        twoClubs = new Card(Rank.TWO, Suit.CLUBS);
+        twoDiamonds = new Card(Rank.TWO, Suit.DIAMONDS);
+        jackClubs = new Card(Rank.JACK, Suit.CLUBS);
+        nineClubs = new Card(Rank.NINE, Suit.CLUBS);
         testHand.addCard(queenClubs);
-        testHand.addCard(jackClubs);
+        testHand.addCard(kingClubs);
+        testHand.addCard(aceClubs);
         testHand.addCard(tenClubs);
+        testHand.addCard(twoClubs);
+
+        player.setHand(testHand);
     }
 
     @Test
@@ -39,7 +52,6 @@ public class PlayerTest {
 
     @Test
     public void playerCanTakeHand(){
-        player.setHand(testHand);
         assertEquals(5, player.getHand().size());
     }
 
@@ -90,6 +102,35 @@ public class PlayerTest {
         assertEquals(false, player.getHolds().get(2).booleanValue());
         assertEquals(false, player.getHolds().get(3).booleanValue());
         assertEquals(false, player.getHolds().get(4).booleanValue());
+    }
+    @Test
+    public void getNumberOfSpacesInHand(){
+        player.toggleHold(1);
+        player.toggleHold(3);
+        assertEquals(3, player.spacesInHand());
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void cannotAddMoreCardsThanSpaceInHand(){
+        ArrayList<Card> testCard = new ArrayList<Card>();
+        testCard.add(tenClubs);
+        player.addNewCards(testCard);
+    }
+
+
+    @Test
+    public void canIntegrateNewCardsIntoHand(){
+        Card origCard0 = player.getHand().getCards().get(0);
+        Card origCard1 = player.getHand().getCards().get(1);
+        player.toggleHold(1);
+        Deck deck = new Deck();
+        ArrayList<Card> newCards = new ArrayList<Card>();
+        newCards = deck.deal(player.spacesInHand());
+        player.addNewCards(newCards);
+        Card newCard0 = player.getHand().getCards().get(0);
+        boolean card0EqualCheck = (origCard0 == newCard0);
+        assertEquals(origCard1, player.getHand().getCards().get(1));
+        assertEquals(false, card0EqualCheck);
     }
 
 
