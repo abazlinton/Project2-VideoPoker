@@ -82,7 +82,8 @@ public class Player {
         if (newCards.size() != spacesInHand()) {
             throw new IllegalArgumentException("Player does not have space in hand for this many cards");
         }
-        Hand newHand = new Hand();
+        HandRank handRank = HandRank.NOT_YET_RANKED;
+        Hand newHand = new Hand(handRank);
         int holdsKey = 0;
         for (Card handCard : hand.getCards()) {
             if (holds.get(holdsKey) == false) {

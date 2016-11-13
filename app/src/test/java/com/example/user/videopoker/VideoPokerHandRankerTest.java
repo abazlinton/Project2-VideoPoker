@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class HandRankerTest {
+public class VideoPokerHandRankerTest {
 
     Hand testHand;
     Card jackHearts;
@@ -20,10 +20,12 @@ public class HandRankerTest {
     Card fiveSpades;
     Card twoDiamonds;
     Card nineClubs;
+    HandRank handRank;
 
     @Before
     public void before() {
-        testHand = new Hand();
+        handRank = HandRank.NOT_YET_RANKED;
+        testHand = new Hand(handRank);
         jackHearts = new Card(Rank.JACK, Suit.HEARTS);
         queenClubs = new Card(Rank.QUEEN, Suit.CLUBS);
         kingClubs = new Card(Rank.KING, Suit.CLUBS);
@@ -46,7 +48,7 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(jackHearts);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.PAIR_LESS_THAN_JACKS, testHand.getRank());
 }
 
@@ -58,7 +60,7 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JACKS_OR_BETTER, testHand.getRank());
     }
 
@@ -70,7 +72,7 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(kingClubs);
         testHand.addCard(jackHearts);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JACKS_OR_BETTER, testHand.getRank());
     }
 
@@ -82,7 +84,7 @@ public class HandRankerTest {
         testHand.addCard(kingClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.TWO_PAIR, testHand.getRank());
     }
 
@@ -94,7 +96,7 @@ public class HandRankerTest {
         testHand.addCard(jackHearts);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.TWO_PAIR, testHand.getRank());
     }
 
@@ -106,7 +108,7 @@ public class HandRankerTest {
         testHand.addCard(jackHearts);
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.THREE_OF_A_KIND, testHand.getRank());
     }
 
@@ -118,7 +120,7 @@ public class HandRankerTest {
         testHand.addCard(jackHearts);
         testHand.addCard(queenClubs);
         testHand.addCard(queenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.FULL_HOUSE, testHand.getRank());
     }
 
@@ -130,7 +132,7 @@ public class HandRankerTest {
         testHand.addCard(twoClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(jackHearts);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.FOUR_OF_A_KIND, testHand.getRank());
     }
 
@@ -142,7 +144,7 @@ public class HandRankerTest {
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
         testHand.addCard(twoClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JUNK, testHand.getRank());
     }
 
@@ -154,7 +156,7 @@ public class HandRankerTest {
         testHand.addCard(kingClubs);
         testHand.addCard(aceClubs);
         testHand.addCard(tenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.STRAIGHT, testHand.getRank());
     }
 
@@ -166,7 +168,7 @@ public class HandRankerTest {
         testHand.addCard(threeHearts);
         testHand.addCard(fourDiamonds);
         testHand.addCard(fiveSpades);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.STRAIGHT, testHand.getRank());
     }
 
@@ -178,7 +180,7 @@ public class HandRankerTest {
         testHand.addCard(twoDiamonds);
         testHand.addCard(fourDiamonds);
         testHand.addCard(fiveSpades);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.PAIR_LESS_THAN_JACKS, testHand.getRank());
 
     }
@@ -191,7 +193,7 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(twoClubs);
         testHand.addCard(tenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.FLUSH, testHand.getRank());
     }
 
@@ -203,7 +205,7 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(jackClubs);
         testHand.addCard(tenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.ROYAL_FLUSH, testHand.getRank());
     }
 
@@ -215,7 +217,7 @@ public class HandRankerTest {
         testHand.addCard(queenClubs);
         testHand.addCard(jackClubs);
         testHand.addCard(tenClubs);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.STRAIGHT_FLUSH, testHand.getRank());
     }
 
@@ -227,7 +229,7 @@ public class HandRankerTest {
         testHand.addCard(kingClubs);
         testHand.addCard(queenClubs);
         testHand.addCard(jackHearts);
-        HandRanker.updateHandRanking(testHand);
+        VideoPokerHandRanker.updateHandRanking(testHand);
         assertEquals(HandRank.JUNK, testHand.getRank());
     }
 

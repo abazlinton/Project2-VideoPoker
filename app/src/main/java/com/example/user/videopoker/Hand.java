@@ -8,8 +8,8 @@ public class Hand {
     private HandRank handRank;
     private ArrayList<Card> cards;
 
-    public Hand(){
-        this.handRank = HandRank.NOT_STARTED;
+    public Hand(HandRank handRank){
+        this.handRank = handRank;
         this.cards = new ArrayList<Card>();
     }
 

@@ -17,11 +17,13 @@ public class HandTest {
     Card twoClubs;
     Card threeClubs;
     Card fourClubs;
+    HandRank handRank;
 
 
     @Before
     public void before() {
-        testHand = new Hand();
+        handRank = HandRank.NOT_YET_RANKED;
+        testHand = new Hand(handRank);
         queenHearts = new Card(Rank.QUEEN, Suit.HEARTS);
 
     }
@@ -34,7 +36,7 @@ public class HandTest {
 
     @Test
     public void rankStartsAsNoPayout() {
-        assertEquals(HandRank.NOT_STARTED, testHand.getRank());
+        assertEquals(HandRank.NOT_YET_RANKED, testHand.getRank());
     }
 
     @Test

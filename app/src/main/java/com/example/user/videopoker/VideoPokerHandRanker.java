@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class HandRanker {
+public class VideoPokerHandRanker {
 
     private static Hand handPassed;
     private static ArrayList<Integer> countsAllCards;
@@ -21,32 +21,13 @@ public class HandRanker {
         cardsFormStraight = false;
         cardsFormFlush = false;
 
-        checkForMultiples();
+        updateHandRankingMutiples();
+        updateHandRankingStraightAndFlush();
+        updateHandRankingNoPayoutHand();
 
-        if (handPassed.getRank() == HandRank.IN_PROGRESS){
-            checkForStraightWhenNoMultiplesFound();
-            checkForFlush();
-        }
-
-        if (cardsFormFlush && cardsFormStraight && handPassed.containsAce()) {
-           handPassed.setRank(HandRank.ROYAL_FLUSH);
-        }
-        if (cardsFormFlush && cardsFormStraight && !handPassed.containsAce()) {
-           handPassed.setRank(HandRank.STRAIGHT_FLUSH);
-        }
-        if (cardsFormStraight && !cardsFormFlush) {
-            handPassed.setRank(HandRank.STRAIGHT);
-        }
-        if (!cardsFormStraight && cardsFormFlush) {
-            handPassed.setRank(HandRank.FLUSH);
-        }
-
-        if (handPassed.getRank() == HandRank.IN_PROGRESS){
-            handPassed.setRank(HandRank.JUNK);
-        }
     }
 
-    private static void checkForMultiples() {
+    private static void updateHandRankingMutiples() {
 
         for (int i = 0; i < 13; i++) {
             countsAllCards.add(0);
@@ -98,6 +79,33 @@ public class HandRanker {
             else {
                 handPassed.setRank(HandRank.PAIR_LESS_THAN_JACKS);
             }
+        }
+    }
+
+    private static void updateHandRankingStraightAndFlush(){
+        if (handPassed.getRank() == HandRank.IN_PROGRESS){
+            checkForStraightWhenNoMultiplesFound();
+            checkForFlush();
+        }
+
+        if (cardsFormFlush && cardsFormStraight && handPassed.containsAce()) {
+            handPassed.setRank(HandRank.ROYAL_FLUSH);
+        }
+        if (cardsFormFlush && cardsFormStraight && !handPassed.containsAce()) {
+            handPassed.setRank(HandRank.STRAIGHT_FLUSH);
+        }
+        if (cardsFormStraight && !cardsFormFlush) {
+            handPassed.setRank(HandRank.STRAIGHT);
+        }
+        if (!cardsFormStraight && cardsFormFlush) {
+            handPassed.setRank(HandRank.FLUSH);
+        }
+
+    }
+
+    private static void updateHandRankingNoPayoutHand(){
+        if (handPassed.getRank() == HandRank.IN_PROGRESS){
+            handPassed.setRank(HandRank.JUNK);
         }
     }
 

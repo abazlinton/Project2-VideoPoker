@@ -23,11 +23,13 @@ public class PlayerTest {
     Card twoDiamonds;
     Card nineClubs;
     Card jackClubs;
+    HandRank handRank;
 
     @Before
     public void before(){
         player = new Player();
-        testHand = new Hand();
+        handRank = HandRank.NOT_YET_RANKED;
+        testHand = new Hand(handRank);
         queenClubs = new Card(Rank.QUEEN, Suit.CLUBS);
         kingClubs = new Card(Rank.KING, Suit.CLUBS);
         aceClubs = new Card(Rank.ACE, Suit.CLUBS);
