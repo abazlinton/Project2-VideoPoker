@@ -48,8 +48,8 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayerStartsWith500Credit(){
-        assertEquals(500, player.getCredit());
+    public void testPlayerStartsWith0Credit(){
+        assertEquals(0, player.getCredit());
     }
 
     @Test
@@ -84,12 +84,14 @@ public class PlayerTest {
 
     @Test
     public void canIncreaseCredit(){
+        player.setCredit(500);
         player.increaseCredit(10);
         assertEquals(510, player.getCredit());
     }
 
     @Test
     public void canDecreaseCredit(){
+        player.setCredit(500);
         player.decreaseCredit(10);
         assertEquals(490, player.getCredit());
     }

@@ -14,7 +14,7 @@ public class Player {
     private HashMap<Integer, Boolean> holds;
 
     public Player() {
-        this.setCredit(500);
+        this.setCredit(0);
         this.holds = new HashMap<Integer, Boolean>();
         resetHolds();
     }

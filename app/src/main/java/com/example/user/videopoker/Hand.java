@@ -29,6 +29,12 @@ public class Hand {
         this.cards.add( card );
     }
 
+    public void addCards(ArrayList<Card> cards){
+        for (Card card : cards){
+            addCard(card);
+        }
+    }
+
     public ArrayList<Card> getCards() {
         return cards;
     }
