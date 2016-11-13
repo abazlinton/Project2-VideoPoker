@@ -57,29 +57,45 @@ public class GameTest {
     @Test
     public void canFinalizeRound(){
         game.startNewRound();
+        System.out.println(player.getCredit());
         game.processSpinOne();
-//        String handString = " Dealt ";
-//        for (Card card: player.getHand().getCards()){
-//            handString += card.toString() + " ";
-//        }
-//        System.out.println(handString);
-//        System.out.println(player.getHand().getRank().toString());
-//        player.toggleHold(1);
-//        player.toggleHold(2);
+        String handString = " Dealt ";
+        for (Card card: player.getHand().getCards()){
+            handString += card.toString() + " ";
+        }
+        System.out.println(handString);
+        System.out.println(player.getHand().getRank().toString());
+        player.toggleHold(1);
         game.doSpinTwo();
         game.processSpinTwo();
-        String handString = " Final ";
+        handString = " Final ";
         for (Card card: player.getHand().getCards()){
             handString += card.toString() + " ";
         }
         System.out.println(handString);
         System.out.println(player.getHand().getRank().toString());
         System.out.println(player.getHand().getRank().getPayout());
+        System.out.println(player.getCredit());
     }
 
 
     @Test
-    public void payoutCorrrect(){
+    public void playerIsPaidOut(){
+        game.startNewRound();
+        Card tenHearts = new Card(Rank.TEN, Suit.HEARTS);
+        Card jackHearts = new Card(Rank.JACK, Suit.HEARTS);
+        Card queenHearts = new Card(Rank.QUEEN, Suit.HEARTS);
+        Card kingHearts = new Card(Rank.KING, Suit.HEARTS);
+        Card aceHearts = new Card(Rank.ACE, Suit.HEARTS);
+        Hand hand = new Hand(HandRank.NOT_YET_RANKED);
+        hand.addCard(tenHearts);
+        hand.addCard(jackHearts);
+        hand.addCard(queenHearts);
+        hand.addCard(kingHearts);
+        hand.addCard(aceHearts);
+        player.setHand(hand);
+        game.processSpinTwo();
+        assertEquals(4495, player.getCredit());
 
     }
 

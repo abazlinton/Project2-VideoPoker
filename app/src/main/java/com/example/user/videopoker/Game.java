@@ -81,6 +81,7 @@ public class Game {
     }
     public void processSpinTwo(){
         VideoPokerHandRanker.updateHandRanking(player.getHand());
+        player.increaseCredit(player.getHand().getRank().getPayout());
     }
 
 }
