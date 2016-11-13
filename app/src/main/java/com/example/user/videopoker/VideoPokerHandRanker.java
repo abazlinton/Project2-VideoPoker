@@ -120,7 +120,7 @@ public class VideoPokerHandRanker {
     //Todo - average make this more robust - middle value == average / halfway
     private static void checkForStraightWhenNoMultiplesFound(){
         // This works because we already know we have no more than one of each card
-        // If we had A2235 this check would detect a straight
+        // If we had A2235 this check on its own would detect a straight
 
         ArrayList<Integer> collectRanks = new ArrayList<Integer>();
 
