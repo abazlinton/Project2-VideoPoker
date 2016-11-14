@@ -84,6 +84,5 @@ public class Player {
                 hand.setCardAtIndexTo(holdsKey, newCards.remove(0));
             }
         }
-        int i=0;
     }
 }

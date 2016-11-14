@@ -30,12 +30,14 @@ public class Game {
     private int sizeOfStartingHand;
 
 
+
     public Game(Player player, Deck deck, int sizeOfStartingHand){
         this.player = player;
         this.deck = deck;
         player.setCredit(500);
         roundCount = 0;
         this.sizeOfStartingHand = sizeOfStartingHand;
+
 
     }
 
@@ -69,6 +71,7 @@ public class Game {
 //        }
 //    }
 
+
     public void processSpinOne(){
         VideoPokerHandRanker.updateHandRanking(player.getHand());
 
@@ -78,10 +81,12 @@ public class Game {
         int cardsRequired = player.cardsReqToRefillTo(5);
         ArrayList<Card> newCards = deck.deal(cardsRequired);
         player.addNewCards(newCards);
+
     }
     public void processSpinTwo(){
         VideoPokerHandRanker.updateHandRanking(player.getHand());
         player.increaseCredit(player.getHand().getRank().getPayout());
+
     }
 
 }

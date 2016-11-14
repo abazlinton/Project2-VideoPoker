@@ -4,10 +4,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by user on 13/11/2016.
@@ -15,6 +19,7 @@ import android.widget.TextView;
 
 public class VideoPokerPlay extends AppCompatActivity {
 
+//    ArrayList<ImageView> mCards;
     ImageView mCard1;
     ImageView mCard2;
     ImageView mCard3;
@@ -23,17 +28,23 @@ public class VideoPokerPlay extends AppCompatActivity {
     Game game;
     Player player;
     Deck deck;
-    Button start;
+    Button deal;
+    Button draw;
     TextView mHandRank;
+    TimingLogger timings;
+    enum Spin {DEAL, DRAW};
+    Spin mSpin;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
         player = new Player();
         deck = new Deck();
         game = new Game(player, deck, 5);
+        game.startNewRound();
 
         mCard1 = (ImageView) findViewById(R.id.card1);
         mCard2 = (ImageView) findViewById(R.id.card2);
@@ -41,71 +52,106 @@ public class VideoPokerPlay extends AppCompatActivity {
         mCard4 = (ImageView) findViewById(R.id.card4);
         mCard5 = (ImageView) findViewById(R.id.card5);
 
+//        mCards.add(mCard1);
+//        mCards.add(mCard2);
+//        mCards.add(mCard3);
+//        mCards.add(mCard4);
+//        mCards.add(mCard5);
+
+
         mHandRank = (TextView) findViewById(R.id.hand_rank);
 
-        start = (Button) findViewById(R.id.start);
+        deal = (Button) findViewById(R.id.deal);
 
-        start.setOnClickListener(new View.OnClickListener() {
+        deal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start();
+                deal();
 
 //                start.setVisibility(View.GONE);
             }
         });
 
 
+
+        draw = (Button) findViewById(R.id.draw);
+
+        draw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                draw();
+
+//                draw.setVisibility(View.GONE);
+            }
+        });
+
+//
+//        for (int i=0; i < 5 ; i++) {
+//            final int j=i;
+//            mCards.get(j).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    toggleSelection(mCards.get(j));
+//                }
+//            });
+//        }
+
         mCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleSelection(mCard1);
+                toggleSelection(mCard1, 0);
             }
         });
 
         mCard2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleSelection(mCard2);
+                toggleSelection(mCard2, 1);
             }
         });
 
         mCard3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleSelection(mCard3);
+                toggleSelection(mCard3, 2);
             }
         });
 
         mCard4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleSelection(mCard4);
+                toggleSelection(mCard4, 3);
             }
         });
 
         mCard5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleSelection(mCard5);
+                toggleSelection(mCard5, 4);
             }
         });
+
+        deal.performClick();
     }
 
-    protected void toggleSelection(ImageView card){
-        int currentPadding = card.getPaddingLeft();
-        if (currentPadding == 0){
-            card.setPadding(2,2,2,2);
-            card.setBackgroundColor(Color.BLUE);
-        }
-        else {
-            card.setPadding(0,0,0,0);
-            card.setBackgroundColor(Color.WHITE);
+
+    protected void toggleSelection(ImageView card, int cardInt){
+        if (mSpin == Spin.DEAL) {
+            player.toggleHold(cardInt);
+
+            int currentPadding = card.getPaddingLeft();
+            if (currentPadding == 0) {
+                card.setPadding(2, 2, 2, 2);
+                card.setBackgroundColor(Color.BLUE);
+            } else {
+                card.setPadding(0, 0, 0, 0);
+                card.setBackgroundColor(Color.WHITE);
+            }
         }
     }
 
-    protected void start(){
-        game.startNewRound();
-        game.processSpinOne();
+    protected void drawCards(){
+
         String drawableName = game.getPlayer().getHand().getCards().get(0).toFileString();
         int drawableResourceId = this.getResources().getIdentifier(drawableName, "drawable", this.getPackageName());
         mCard1.setImageResource(drawableResourceId);
@@ -121,9 +167,43 @@ public class VideoPokerPlay extends AppCompatActivity {
         drawableName = game.getPlayer().getHand().getCards().get(4).toFileString();
         drawableResourceId = this.getResources().getIdentifier(drawableName, "drawable", this.getPackageName());
         mCard5.setImageResource(drawableResourceId);
-        mHandRank.setText(player.getHand().getRank().toString());
     }
 
+    protected void deal(){
+        mSpin = Spin.DEAL;
+        clearSelection();
+        game.startNewRound();
+        drawCards();
+        game.processSpinOne();
+        mHandRank.setText(player.getHand().getRank().toString());
+        deal.setVisibility(View.INVISIBLE);
+        draw.setVisibility(View.VISIBLE);
+    }
+
+    protected void draw(){
+        mSpin = Spin.DRAW;
+        game.doSpinTwo();
+        drawCards();
+        game.processSpinTwo();
+        mHandRank.setText(player.getHand().getRank().toString());
+        deal.setVisibility(View.VISIBLE);
+        draw.setVisibility(View.INVISIBLE);
+    }
+
+    protected void clearSelection(){
+
+        mCard1.setPadding(0,0,0,0);
+        mCard1.setBackgroundColor(Color.WHITE);
+        mCard2.setPadding(0,0,0,0);
+        mCard2.setBackgroundColor(Color.WHITE);
+        mCard3.setPadding(0,0,0,0);
+        mCard3.setBackgroundColor(Color.WHITE);
+        mCard4.setPadding(0,0,0,0);
+        mCard4.setBackgroundColor(Color.WHITE);
+        mCard5.setPadding(0,0,0,0);
+        mCard5.setBackgroundColor(Color.WHITE);
+
+    }
 
 
 
