@@ -34,6 +34,8 @@ public class VideoPokerPlay extends AppCompatActivity {
     TimingLogger timings;
     enum Spin {DEAL, DRAW};
     Spin mSpin;
+    TextView credit;
+    TextView game_over;
 
 
     @Override
@@ -44,13 +46,16 @@ public class VideoPokerPlay extends AppCompatActivity {
         player = new Player();
         deck = new Deck();
         game = new Game(player, deck, 5);
-        game.startNewRound();
+//        game.startNewRound();
 
         mCard1 = (ImageView) findViewById(R.id.card1);
         mCard2 = (ImageView) findViewById(R.id.card2);
         mCard3 = (ImageView) findViewById(R.id.card3);
         mCard4 = (ImageView) findViewById(R.id.card4);
         mCard5 = (ImageView) findViewById(R.id.card5);
+
+        credit = (TextView) findViewById(R.id.credit);
+        game_over = (TextView) findViewById(R.id.game_over);
 
 //        mCards.add(mCard1);
 //        mCards.add(mCard2);
@@ -170,12 +175,16 @@ public class VideoPokerPlay extends AppCompatActivity {
     }
 
     protected void deal(){
+
         mSpin = Spin.DEAL;
         clearSelection();
         game.startNewRound();
+        credit.setText(Integer.toString(player.getCredit()));
+        game_over.setVisibility(View.INVISIBLE);
         drawCards();
         game.processSpinOne();
-        mHandRank.setText(player.getHand().getRank().toString());
+        HandRank tempHandRank = player.getHand().getRank();
+        mHandRank.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
         deal.setVisibility(View.INVISIBLE);
         draw.setVisibility(View.VISIBLE);
     }
@@ -185,7 +194,10 @@ public class VideoPokerPlay extends AppCompatActivity {
         game.doSpinTwo();
         drawCards();
         game.processSpinTwo();
-        mHandRank.setText(player.getHand().getRank().toString());
+        credit.setText(Integer.toString(player.getCredit()));
+        game_over.setVisibility(View.VISIBLE);
+        HandRank tempHandRank = player.getHand().getRank();
+        mHandRank.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
         deal.setVisibility(View.VISIBLE);
         draw.setVisibility(View.INVISIBLE);
     }

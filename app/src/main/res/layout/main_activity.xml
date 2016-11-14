@@ -86,10 +86,39 @@
         android:gravity="bottom"
         android:layout_marginLeft="10dp"
         android:id="@+id/hand_rank"
-        android:textSize="14sp"
+        android:textSize="16dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        />
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/deal"
+        android:layout_alignRight="@+id/card5"
+        android:layout_alignEnd="@+id/card5"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:id="@+id/credit"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="GAME OVER"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/game_over"
+        android:textSize="36sp"
+        android:gravity="center"
+        android:layout_marginTop="52dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignTop="@+id/card2"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

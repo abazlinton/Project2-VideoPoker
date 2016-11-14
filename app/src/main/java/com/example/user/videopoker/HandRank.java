@@ -1,6 +1,8 @@
 package com.example.user.videopoker;
 
 
+import java.util.ArrayList;
+
 public enum HandRank {
     ROYAL_FLUSH (4000),
     STRAIGHT_FLUSH (250),
@@ -16,11 +18,24 @@ public enum HandRank {
     IN_PROGRESS (0),
     NOT_YET_RANKED (0);
 
+    public final ArrayList<String> humanFriendly;
 
     private final int payout;
 
     HandRank(int payout){
         this.payout = payout;
+        humanFriendly = new ArrayList<String>();
+        humanFriendly.add("Royal Flush");
+        humanFriendly.add("Straight Flush");
+        humanFriendly.add("Four of a Kind");
+        humanFriendly.add("Full House");
+        humanFriendly.add("Flush");
+        humanFriendly.add("Straight");
+        humanFriendly.add("Three of a Kind");
+        humanFriendly.add("Two Pair");
+        humanFriendly.add("Jacks or Better");
+        humanFriendly.add("Pair less than Jacks");
+        humanFriendly.add("Junk");
     }
 
     public int getPayout() {

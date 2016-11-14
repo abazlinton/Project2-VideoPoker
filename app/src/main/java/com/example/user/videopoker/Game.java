@@ -37,8 +37,6 @@ public class Game {
         player.setCredit(500);
         roundCount = 0;
         this.sizeOfStartingHand = sizeOfStartingHand;
-
-
     }
 
     public Player getPlayer() {
