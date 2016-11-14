@@ -7,11 +7,14 @@ import android.util.Log;
 import android.util.TimingLogger;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by user on 13/11/2016.
@@ -36,6 +39,7 @@ public class VideoPokerPlay extends AppCompatActivity {
     Spin mSpin;
     TextView credit;
     TextView game_over;
+    Animation pulse;
 
 
     @Override
@@ -56,6 +60,9 @@ public class VideoPokerPlay extends AppCompatActivity {
 
         credit = (TextView) findViewById(R.id.credit);
         game_over = (TextView) findViewById(R.id.game_over);
+
+        pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
+
 
 //        mCards.add(mCard1);
 //        mCards.add(mCard2);
@@ -195,6 +202,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         drawCards();
         game.processSpinTwo();
         credit.setText(Integer.toString(player.getCredit()));
+        game_over.startAnimation(pulse);
         game_over.setVisibility(View.VISIBLE);
         HandRank tempHandRank = player.getHand().getRank();
         mHandRank.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
