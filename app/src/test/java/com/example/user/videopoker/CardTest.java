@@ -41,4 +41,22 @@ public class CardTest {
         assertEquals("Td", card2.toString());
     }
 
+    @Test
+    public void testToFileStringTd(){
+        card2 = new Card(Rank.TEN, Suit.DIAMONDS);
+        assertEquals("i10_of_diamonds", card2.toFileString());
+    }
+
+    @Test
+    public void testToFileString2s(){
+        card2 = new Card(Rank.TWO, Suit.SPADES);
+        assertEquals("i2_of_spades", card2.toFileString());
+    }
+
+    @Test
+    public void testToFileStringAh(){
+        card2 = new Card(Rank.ACE, Suit.HEARTS);
+        assertEquals("ace_of_hearts", card2.toFileString());
+    }
+
 }

@@ -34,6 +34,23 @@ public class Card {
         stringSuit = suit.toString().substring(0,1).toLowerCase();
         return stringRank + stringSuit;
     }
+
+    public String toFileString()
+    {
+        String startNumbers = "i";
+        String stringRank = "";
+        String stringSuit = "";
+        String middle = "_of_";
+        if (rank.ordinal() < 9) {
+            stringRank = startNumbers + Integer.toString(rank.ordinal() + 2);
+        }
+        else {
+            stringRank = (String) rank.toString().toLowerCase();
+        }
+        stringSuit = suit.toString().toLowerCase();
+        return stringRank + middle + stringSuit;
+
+    }
 }
 
 
