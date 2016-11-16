@@ -64,5 +64,6 @@ public class LogActivity extends AppCompatActivity {
         mAdapter = gameLog.getAdapterForView(this, toViews);
         mLog.setAdapter(mAdapter);
 
+
     }
 }

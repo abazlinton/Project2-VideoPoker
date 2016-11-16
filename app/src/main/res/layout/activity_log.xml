@@ -8,7 +8,10 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/log">
+        android:id="@+id/log"
+        android:stackFromBottom="true"
+
+        >
 
     </ListView>
 
@@ -18,19 +21,23 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="70dp"
-            android:padding="10dp"
+            android:layout_width="60dp"
+            android:padding="5dp"
+            android:textSize="10dp"
+
             android:layout_height="wrap_content"
 
-            android:id="@+id/id"/>
+            android:id="@+id/id"
+            android:fontFamily="monospace" />
 
 
         <TextView
-            android:layout_width="120dp"
-            android:padding="10dp"
+            android:layout_width="140dp"
+            android:padding="5dp"
             android:layout_height="wrap_content"
 
-            android:id="@+id/deal"/>
+            android:id="@+id/deal"
+            android:fontFamily="monospace" />
 
         <!--<TextView-->
             <!--android:layout_width="50dp"-->
@@ -40,24 +47,29 @@
 
 
         <TextView
-            android:layout_width="120dp"
-            android:padding="10dp"
+            android:layout_width="140dp"
+            android:padding="5dp"
             android:layout_height="wrap_content"
             android:id="@+id/final_hand"
-            />
+
+            android:fontFamily="monospace" />
 
         <TextView
             android:layout_width="50dp"
-            android:padding="10dp"
+            android:padding="5dp"
+           android:textSize="12dp"
             android:layout_height="wrap_content"
             android:id="@+id/net_winnings"
-            />
+            android:textAlignment="textEnd"
+
+            android:fontFamily="monospace" />
         <TextView
-            android:layout_width="50dp"
-            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
             android:layout_height="wrap_content"
             android:id="@+id/hand_rank_log"
-            />
+
+            android:fontFamily="monospace" />
 
 
 

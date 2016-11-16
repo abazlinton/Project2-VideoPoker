@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TimingLogger;
 import android.view.View;
+
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -174,6 +176,7 @@ public class VideoPokerPlay extends AppCompatActivity {
                 card.setBackgroundColor(Color.WHITE);
             }
         }
+
     }
 
     protected void drawCards(){
