@@ -45,6 +45,20 @@ public class HandTest {
        assertEquals(Rank.QUEEN, testHand.getCards().get(0).getRank());
     }
 
+   @Test
+   public void canGetHandString(){
+       fourDiamonds = new Card(Rank.FOUR, Suit.DIAMONDS);
+       queenClubs = new Card(Rank.QUEEN, Suit.CLUBS);
+       kingClubs = new Card(Rank.KING, Suit.CLUBS);
+       aceClubs = new Card(Rank.ACE, Suit.CLUBS);
+       testHand.addCard(queenHearts);
+       testHand.addCard(fourDiamonds);
+       testHand.addCard(queenClubs);
+       testHand.addCard(kingClubs);
+       testHand.addCard(aceClubs);
+       assertEquals("Qh 4d Qc Kc Ac", testHand.toString());
+   }
+
 
 
 

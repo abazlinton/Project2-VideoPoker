@@ -39,13 +39,16 @@ public class VideoPokerPlay extends AppCompatActivity {
     TextView credit;
     TextView game_over;
     Animation pulse;
-
+    GameLog gameLog;
+    String dealString, finalHandString;
+    int winnings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
+        gameLog = new GameLog();
+        //gameLog.addToDb(this);
         player = new Player();
         deck = new Deck();
         game = new Game(player, deck, 5);
@@ -195,6 +198,8 @@ public class VideoPokerPlay extends AppCompatActivity {
         mHandRank.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
         deal.setVisibility(View.INVISIBLE);
         draw.setVisibility(View.VISIBLE);
+        dealString = player.getHand().toString();
+
     }
 
     protected void draw(){
@@ -209,6 +214,9 @@ public class VideoPokerPlay extends AppCompatActivity {
         game_over.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
         deal.setVisibility(View.VISIBLE);
         draw.setVisibility(View.INVISIBLE);
+        finalHandString = player.getHand().toString();
+        winnings = player.getHand().getRank().getPayout();
+        gameLog.addToDb(this, dealString, finalHandString, (winnings - 5));
     }
 
     protected void clearSelection(){

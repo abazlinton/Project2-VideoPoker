@@ -61,6 +61,17 @@ public class Hand {
         return false;
     }
 
+    @Override
+    public String toString(){
+        String handString = "";
+        for( Card card : cards){
+            handString += card.toString() + " ";
+        }
+        handString = handString.substring(0, handString.length()-1);
+        return handString;
+    }
+
+
 //    public void sortByRank(){
 //
 //    }

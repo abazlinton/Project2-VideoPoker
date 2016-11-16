@@ -8,8 +8,8 @@ import static com.example.user.videopoker.GameLogContract.GameLogTable;
 
 public class DbHelper extends SQLiteOpenHelper {
         // If you change the database schema, you must increment the database version.
-        public static final int DATABASE_VERSION = 9;
-        public static final String DATABASE_NAME = "game_logger.db";
+        public static final int DATABASE_VERSION = 2;
+        public static final String DATABASE_NAME = "game_log.db";
         private static final String TEXT_TYPE = " TEXT";
         private static final String INTEGER_TYPE = " INTEGER";
         private static final String COMMA_SEP = ",";
@@ -18,10 +18,9 @@ public class DbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + GameLogTable.TABLE_NAME + " (" +
             GameLogTable._ID + " INTEGER PRIMARY KEY," +
             GameLogTable.COLUMN_NAME_DEAL + TEXT_TYPE + COMMA_SEP +
-            GameLogTable.COLUMN_NAME_HELD + TEXT_TYPE + COMMA_SEP +
+//            GameLogTable.COLUMN_NAME_HELD + TEXT_TYPE + COMMA_SEP +
             GameLogTable.COLUMN_NAME_FINAL + TEXT_TYPE + COMMA_SEP +
-            GameLogTable.COLUMN_NAME_NET + INTEGER_TYPE + COMMA_SEP +
-            GameLogTable.DUMMY_IMAGE + TEXT_TYPE + " )";
+            GameLogTable.COLUMN_NAME_NET + INTEGER_TYPE + " )";
 
         private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + GameLogTable.TABLE_NAME;
@@ -38,7 +37,5 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL(SQL_DELETE_ENTRIES);
             onCreate(db);
         }
-
-
 
 }
