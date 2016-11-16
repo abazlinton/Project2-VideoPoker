@@ -1,5 +1,6 @@
 package com.example.user.videopoker;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -223,8 +224,12 @@ public class VideoPokerPlay extends AppCompatActivity {
         mSpin = Spin.DRAW;
         game.doSpinTwo();
         drawCards();
+        int beforeCredit = player.getCredit();
         game.processSpinTwo();
-        credit.setText(Integer.toString(player.getCredit()));
+        int afterCredit = player.getCredit();
+//        credit.setText(Integer.toString(player.getCredit()));
+        startCreditAnimation(beforeCredit, afterCredit, 2000);
+        credit.startAnimation(pulse);
         game_over.startAnimation(pulse);
         game_over.setVisibility(View.VISIBLE);
         HandRank tempHandRank = player.getHand().getRank();
@@ -253,6 +258,18 @@ public class VideoPokerPlay extends AppCompatActivity {
 
     }
 
+    private void startCreditAnimation(int start, int stop, int duration) {
+        ValueAnimator animator = new ValueAnimator();
+        animator.setObjectValues(start, stop);
+        animator.setDuration(duration);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                TextView creditText = (TextView) findViewById(R.id.credit);
+                creditText.setText("" + (int) animation.getAnimatedValue());
+            }
+        });
+        animator.start();
+    }
 
 
 

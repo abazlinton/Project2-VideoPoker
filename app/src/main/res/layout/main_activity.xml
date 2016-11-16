@@ -76,6 +76,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="invisible"
+
         android:layout_marginBottom="20dp"
        />
 
@@ -103,7 +104,8 @@
         android:layout_marginRight="18dp"
         android:layout_marginEnd="18dp"
         android:id="@+id/credit"
-        android:textSize="18sp"
+        android:textSize="24dp"
+        android:fontFamily="monospace"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="normal|bold" />
 
@@ -118,6 +120,7 @@
         android:background="@color/colorPrimaryDark"
         android:visibility="invisible"
         android:layout_marginTop="60dp"
+        android:layout_alignStart="@id/card3"
 
         android:layout_centerHorizontal="true" />
 
