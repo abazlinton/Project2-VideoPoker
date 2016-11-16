@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TimingLogger;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -181,8 +180,10 @@ public class VideoPokerPlay extends AppCompatActivity {
         mCard5.setImageResource(drawableResourceId);
     }
 
-    protected void deal(){
 
+
+
+    protected void deal(){
         mSpin = Spin.DEAL;
         clearSelection();
         game.startNewRound();
@@ -205,7 +206,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         game_over.startAnimation(pulse);
         game_over.setVisibility(View.VISIBLE);
         HandRank tempHandRank = player.getHand().getRank();
-        mHandRank.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
+        game_over.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
         deal.setVisibility(View.VISIBLE);
         draw.setVisibility(View.INVISIBLE);
     }
