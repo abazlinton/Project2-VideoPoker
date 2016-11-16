@@ -8,7 +8,7 @@ import static com.example.user.videopoker.GameLogContract.GameLogTable;
 
 public class DbHelper extends SQLiteOpenHelper {
         // If you change the database schema, you must increment the database version.
-        public static final int DATABASE_VERSION = 2;
+        public static final int DATABASE_VERSION = 3;
         public static final String DATABASE_NAME = "game_log.db";
         private static final String TEXT_TYPE = " TEXT";
         private static final String INTEGER_TYPE = " INTEGER";
@@ -20,7 +20,8 @@ public class DbHelper extends SQLiteOpenHelper {
             GameLogTable.COLUMN_NAME_DEAL + TEXT_TYPE + COMMA_SEP +
 //            GameLogTable.COLUMN_NAME_HELD + TEXT_TYPE + COMMA_SEP +
             GameLogTable.COLUMN_NAME_FINAL + TEXT_TYPE + COMMA_SEP +
-            GameLogTable.COLUMN_NAME_NET + INTEGER_TYPE + " )";
+            GameLogTable.COLUMN_NAME_NET + INTEGER_TYPE + COMMA_SEP +
+            GameLogTable.COLUMN_NAME_HANDRANK + TEXT_TYPE + " )";
 
         private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + GameLogTable.TABLE_NAME;

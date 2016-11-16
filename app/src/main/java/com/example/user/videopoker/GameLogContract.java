@@ -14,6 +14,7 @@ public final class GameLogContract {
 //        public static final String COLUMN_NAME_HELD = "held";
         public static final String COLUMN_NAME_FINAL = "final";
         public static final String COLUMN_NAME_NET = "net_winnings";
+        public static final String COLUMN_NAME_HANDRANK = "hand_rank";
 //        public static final String DUMMY_IMAGE = "dummy_image";
 
     }

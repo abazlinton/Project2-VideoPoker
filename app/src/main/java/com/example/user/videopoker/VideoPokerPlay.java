@@ -204,6 +204,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         game.startNewRound();
         credit.setText(Integer.toString(player.getCredit()));
         game_over.setVisibility(View.INVISIBLE);
+        view_log.setVisibility(View.INVISIBLE);
         drawCards();
         game.processSpinOne();
         HandRank tempHandRank = player.getHand().getRank();
@@ -211,6 +212,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         deal.setVisibility(View.INVISIBLE);
         draw.setVisibility(View.VISIBLE);
         dealString = player.getHand().toString();
+        ;
 
     }
 
@@ -223,12 +225,14 @@ public class VideoPokerPlay extends AppCompatActivity {
         game_over.startAnimation(pulse);
         game_over.setVisibility(View.VISIBLE);
         HandRank tempHandRank = player.getHand().getRank();
-        game_over.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
+        String handRankString = tempHandRank.humanFriendly.get(tempHandRank.ordinal());
+        game_over.setText(handRankString);
         deal.setVisibility(View.VISIBLE);
         draw.setVisibility(View.INVISIBLE);
+        view_log.setVisibility(View.VISIBLE);
         finalHandString = player.getHand().toString();
         winnings = player.getHand().getRank().getPayout();
-        gameLog.addToDb(this, dealString, finalHandString, (winnings - 5));
+        gameLog.addToDb(this, dealString, finalHandString, (winnings - 5), handRankString );
     }
 
     protected void clearSelection(){

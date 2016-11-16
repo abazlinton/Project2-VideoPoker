@@ -18,14 +18,16 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="70dp"
+            android:padding="10dp"
             android:layout_height="wrap_content"
 
             android:id="@+id/id"/>
 
 
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="120dp"
+            android:padding="10dp"
             android:layout_height="wrap_content"
 
             android:id="@+id/deal"/>
@@ -38,15 +40,23 @@
 
 
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="120dp"
+            android:padding="10dp"
             android:layout_height="wrap_content"
             android:id="@+id/final_hand"
             />
 
         <TextView
             android:layout_width="50dp"
+            android:padding="10dp"
             android:layout_height="wrap_content"
             android:id="@+id/net_winnings"
+            />
+        <TextView
+            android:layout_width="50dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/hand_rank_log"
             />
 
 

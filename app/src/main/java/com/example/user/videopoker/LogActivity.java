@@ -18,14 +18,16 @@ public class LogActivity extends AppCompatActivity {
     TextView mHeldView;
     TextView mFinalHandView;
     TextView mNetWinnings;
+    TextView mHandRankLog;
     ImageView iv;
     ListView mLog;
-    static final String[] PROJECTION = new String[] {GameLogContract.GameLogTable._ID,
-            GameLogContract.GameLogTable.COLUMN_NAME_DEAL,
+    static final String[] PROJECTION = new String[] {
+            GameLogTable._ID,
+            GameLogTable.COLUMN_NAME_DEAL,
 //            GameLogContract.GameLogTable.COLUMN_NAME_HELD,
-            GameLogContract.GameLogTable.COLUMN_NAME_FINAL,
-            GameLogContract.GameLogTable.COLUMN_NAME_NET,
-    };
+            GameLogTable.COLUMN_NAME_FINAL,
+            GameLogTable.COLUMN_NAME_NET,
+            GameLogTable.COLUMN_NAME_HANDRANK};
     SimpleCursorAdapter mAdapter;
 
 
@@ -50,11 +52,13 @@ public class LogActivity extends AppCompatActivity {
 //        mHeldView = (TextView) findViewById(R.id.held);
         mFinalHandView = (TextView) findViewById(R.id.final_hand);
         mNetWinnings = (TextView) findViewById(R.id.net_winnings);
+        mHandRankLog = (TextView) findViewById(R.id.hand_rank_log);
+
         mLog = (ListView) findViewById(R.id.log);
 //        iv = (ImageView) findViewById(R.drawable.ace_of_clubs);
 //        iv.setImageResource(R.drawable.ace_of_clubs);
 
-        int[] toViews = {R.id.id, R.id.deal, R.id.final_hand, R.id.net_winnings};
+        int[] toViews = {R.id.id, R.id.deal, R.id.final_hand, R.id.net_winnings, R.id.hand_rank_log};
         GameLog gameLog = new GameLog();
 
         mAdapter = gameLog.getAdapterForView(this, toViews);

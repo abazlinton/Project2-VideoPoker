@@ -24,7 +24,7 @@ public class GameLog {
     }
 
 
-    protected void addToDb(Context context, String dealString, String finalHandString, int winnings){
+    protected void addToDb(Context context, String dealString, String finalHandString, int winnings, String handRank){
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.main);
 //
@@ -39,6 +39,7 @@ public class GameLog {
 //        values.put(GameLogTable.COLUMN_NAME_HELD, "held");
         values.put(GameLogTable.COLUMN_NAME_FINAL, finalHandString);
         values.put(GameLogTable.COLUMN_NAME_NET, winnings);
+        values.put(GameLogTable.COLUMN_NAME_HANDRANK, handRank);
 
         long newRowId = db.insert(GameLogTable.TABLE_NAME, null, values);
         db.close();
@@ -55,6 +56,7 @@ public class GameLog {
 //                GameLogTable.COLUMN_NAME_HELD,
                 GameLogTable.COLUMN_NAME_FINAL,
                 GameLogTable.COLUMN_NAME_NET,
+                GameLogTable.COLUMN_NAME_HANDRANK
 //                GameLogTable.DUMMY_IMAGE
         };
 
