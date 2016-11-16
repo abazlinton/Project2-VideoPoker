@@ -120,5 +120,14 @@
         android:layout_above="@+id/deal"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:text="view log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/deal"
+        android:layout_alignRight="@+id/card4"
+        android:layout_alignEnd="@+id/card4"
+        android:id="@+id/view_log" />
+
 
 </RelativeLayout>

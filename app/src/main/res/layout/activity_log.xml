@@ -30,11 +30,11 @@
 
             android:id="@+id/deal"/>
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/held"
-           />
+        <!--<TextView-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/held"-->
+           <!--/>-->
 
 
         <TextView

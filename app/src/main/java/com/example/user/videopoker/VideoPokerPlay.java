@@ -1,5 +1,6 @@
 package com.example.user.videopoker;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class VideoPokerPlay extends AppCompatActivity {
     Game game;
     Player player;
     Deck deck;
-    Button deal;
+    Button deal, view_log;
     Button draw;
     TextView mHandRank;
     TimingLogger timings;
@@ -142,6 +143,17 @@ public class VideoPokerPlay extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 toggleSelection(mCard5, 4);
+            }
+        });
+
+        view_log = (Button) findViewById(R.id.view_log);
+
+        view_log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(VideoPokerPlay.this, LogActivity.class);
+                startActivity(intent);
+
             }
         });
 
