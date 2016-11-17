@@ -11,18 +11,22 @@
         <activity
             android:name=".VideoPokerPlay"
             android:label="Video Poker"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LogActivity"
-         android:parentActivityName=".VideoPokerPlay"
-            >
-
-        </activity>
+        <activity
+            android:name=".LogActivity"
+            android:label="Log"
+            android:parentActivityName=".VideoPokerPlay"></activity>
+        <activity
+            android:name=".PayoutActivity"
+            android:label="Payouts"
+            android:parentActivityName=".VideoPokerPlay"></activity>
     </application>
 
 </manifest>

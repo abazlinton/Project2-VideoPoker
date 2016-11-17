@@ -20,6 +20,8 @@ public enum HandRank {
 
     public final ArrayList<String> humanFriendly;
 
+    public final int[] payouts;
+
     private final int payout;
 
     HandRank(int payout){
@@ -36,6 +38,8 @@ public enum HandRank {
         humanFriendly.add("Jacks or Better");
         humanFriendly.add("Pair less than Jacks");
         humanFriendly.add("Junk");
+        payouts = new int[] {4000, 250, 125,45,30,20,25,10,5,0,0};
+
     }
 
     public int getPayout() {

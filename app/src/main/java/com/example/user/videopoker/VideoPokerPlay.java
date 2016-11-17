@@ -1,20 +1,35 @@
 package com.example.user.videopoker;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TimingLogger;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,7 +49,7 @@ public class VideoPokerPlay extends AppCompatActivity {
     Game game;
     Player player;
     Deck deck;
-    Button deal, view_log;
+    Button deal;
     Button draw;
     TextView mHandRank;
     TimingLogger timings;
@@ -42,7 +57,7 @@ public class VideoPokerPlay extends AppCompatActivity {
     Spin mSpin;
     TextView credit;
     TextView game_over;
-    Animation pulse;
+    Animation pulse, pulse_credit;
     GameLog gameLog;
     String dealString, finalHandString;
     int winnings;
@@ -68,6 +83,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         game_over = (TextView) findViewById(R.id.game_over);
 
         pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
+        pulse_credit = AnimationUtils.loadAnimation(this, R.anim.pulse_credit);
 
 
 //        mCards.add(mCard1);
@@ -149,16 +165,7 @@ public class VideoPokerPlay extends AppCompatActivity {
             }
         });
 
-        view_log = (Button) findViewById(R.id.view_log);
-
-        view_log.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(VideoPokerPlay.this, LogActivity.class);
-                startActivity(intent);
-
-            }
-        });
+//        view_log = (Button) findViewById(R.id.view_log);
 
         deal.performClick();
     }
@@ -203,12 +210,19 @@ public class VideoPokerPlay extends AppCompatActivity {
 
 
     protected void deal(){
+        int storedCredits = CreditPreferences.getStoredCredits(this);
+        player.setCredit(storedCredits);
+        if (player.getCredit() == 999){
+            player.setCredit(500);
+        }
         mSpin = Spin.DEAL;
         clearSelection();
         game.startNewRound();
+
+
         credit.setText(Integer.toString(player.getCredit()));
         game_over.setVisibility(View.INVISIBLE);
-        view_log.setVisibility(View.INVISIBLE);
+//        view_log.setVisibility(View.INVISIBLE);
         drawCards();
         game.processSpinOne();
         HandRank tempHandRank = player.getHand().getRank();
@@ -216,7 +230,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         deal.setVisibility(View.INVISIBLE);
         draw.setVisibility(View.VISIBLE);
         dealString = player.getHand().toString();
-        ;
+
 
     }
 
@@ -225,19 +239,23 @@ public class VideoPokerPlay extends AppCompatActivity {
         game.doSpinTwo();
         drawCards();
         int beforeCredit = player.getCredit();
+
         game.processSpinTwo();
         int afterCredit = player.getCredit();
+        CreditPreferences.setStoredCredits(this, afterCredit);
 //        credit.setText(Integer.toString(player.getCredit()));
         startCreditAnimation(beforeCredit, afterCredit, 2000);
-        credit.startAnimation(pulse);
-        game_over.startAnimation(pulse);
-        game_over.setVisibility(View.VISIBLE);
+        credit.startAnimation(pulse_credit);
+        mHandRank.startAnimation(pulse);
+//        game_over.startAnimation(pulse);
+//        game_over.setVisibility(View.VISIBLE);
         HandRank tempHandRank = player.getHand().getRank();
         String handRankString = tempHandRank.humanFriendly.get(tempHandRank.ordinal());
-        game_over.setText(handRankString);
+        mHandRank.setText(tempHandRank.humanFriendly.get(tempHandRank.ordinal()));
+//        game_over.setText(handRankString);
         deal.setVisibility(View.VISIBLE);
         draw.setVisibility(View.INVISIBLE);
-        view_log.setVisibility(View.VISIBLE);
+//        view_log.setVisibility(View.VISIBLE);
         finalHandString = player.getHand().toString();
         winnings = player.getHand().getRank().getPayout();
         gameLog.addToDb(this, dealString, finalHandString, (winnings - 5), handRankString );
@@ -271,6 +289,30 @@ public class VideoPokerPlay extends AppCompatActivity {
         animator.start();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == R.id.log){
+
+            Intent intent = new Intent(VideoPokerPlay.this, LogActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        else if (item.getItemId() == R.id.payouts) {
 
 
+            Intent intent = new Intent(VideoPokerPlay.this, PayoutActivity.class);
+            startActivity(intent);
+            return true;
+
+        };
+        return true;
+    };
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/colorWhite"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/payouts"
+
+    >
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/hand_rank_friendly"
+
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="15dp"
+        android:lineSpacingExtra="7dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/hand_rank_payout"
+
+        android:layout_marginRight="150dp"
+        android:layout_marginTop="15dp"
+        android:lineSpacingExtra="7dp"
+        android:textStyle="bold"
+
+        />
+
+
+</LinearLayout>

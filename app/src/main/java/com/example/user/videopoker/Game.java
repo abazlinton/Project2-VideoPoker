@@ -34,7 +34,6 @@ public class Game {
     public Game(Player player, Deck deck, int sizeOfStartingHand){
         this.player = player;
         this.deck = deck;
-        player.setCredit(500);
         roundCount = 0;
         this.sizeOfStartingHand = sizeOfStartingHand;
     }

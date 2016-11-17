@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.View;
 import android.widget.SimpleCursorAdapter;
 
 
@@ -67,7 +66,7 @@ public class GameLog {
 
         SimpleCursorAdapter mAdapter;
 
-        mAdapter = new SimpleCursorAdapter(context, R.layout.activity_log, null, fromColumns, toViews, 0);
+        mAdapter = new SimpleCursorAdapter(context, R.layout.log_activity, null, fromColumns, toViews, 0);
         Cursor c = db.query(
                 GameLogTable.TABLE_NAME,                     // The table to query
                 PROJECTION,                               // The columns to return

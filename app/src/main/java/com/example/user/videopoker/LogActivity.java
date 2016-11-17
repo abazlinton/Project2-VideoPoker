@@ -1,7 +1,5 @@
 package com.example.user.videopoker;
 
-import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -38,7 +36,7 @@ public class LogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log);
+        setContentView(R.layout.log_activity);
 
         mDbHelper = new DbHelper(this);
 
