@@ -1,37 +1,22 @@
 package com.example.user.videopoker;
 
 import android.animation.ValueAnimator;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TimingLogger;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 
 /**
@@ -218,6 +203,7 @@ public class VideoPokerPlay extends AppCompatActivity {
         mSpin = Spin.DEAL;
         clearSelection();
         game.startNewRound();
+        CreditPreferences.setStoredCredits(this, player.getCredit());
 
 
         credit.setText(Integer.toString(player.getCredit()));
@@ -239,7 +225,6 @@ public class VideoPokerPlay extends AppCompatActivity {
         game.doSpinTwo();
         drawCards();
         int beforeCredit = player.getCredit();
-
         game.processSpinTwo();
         int afterCredit = player.getCredit();
         CreditPreferences.setStoredCredits(this, afterCredit);

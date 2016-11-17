@@ -30,7 +30,7 @@ public class GameTest {
     @Test
     public void canStartNewGame(){
         assertEquals(0, game.getRoundCount());
-        assertEquals(500, game.getPlayer().getCredit());
+        assertEquals(0, game.getPlayer().getCredit());
 //        assertEquals(0, game.getPlayer().getHandSize());
     }
 
@@ -51,7 +51,7 @@ public class GameTest {
         assertEquals(true, handRanked);
         handRanked = (player.getHand().getRank() != HandRank.NOT_YET_RANKED);
         assertEquals(true, handRanked);
-        assertEquals(495, game.getPlayer().getCredit());
+        assertEquals(-5, game.getPlayer().getCredit());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class GameTest {
         hand.addCard(aceHearts);
         player.setHand(hand);
         game.processSpinTwo();
-        assertEquals(4495, player.getCredit());
+        assertEquals(3995, player.getCredit());
 
     }
 
