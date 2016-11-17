@@ -42,10 +42,12 @@ public class VideoPokerPlay extends AppCompatActivity {
     Spin mSpin;
     TextView credit;
     TextView game_over;
+    TextView net;
     Animation pulse, pulse_credit;
     GameLog gameLog;
     String dealString, finalHandString;
     int winnings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +67,11 @@ public class VideoPokerPlay extends AppCompatActivity {
         mCard5 = (ImageView) findViewById(R.id.card5);
 
         credit = (TextView) findViewById(R.id.credit);
+        net = (TextView) findViewById(R.id.net);
         game_over = (TextView) findViewById(R.id.game_over);
 
         pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
         pulse_credit = AnimationUtils.loadAnimation(this, R.anim.pulse_credit);
-
-
-//        mCards.add(mCard1);
-//        mCards.add(mCard2);
-//        mCards.add(mCard3);
-//        mCards.add(mCard4);
-//        mCards.add(mCard5);
 
 
         mHandRank = (TextView) findViewById(R.id.hand_rank);
@@ -208,6 +204,7 @@ public class VideoPokerPlay extends AppCompatActivity {
 
         credit.setText(Integer.toString(player.getCredit()));
         game_over.setVisibility(View.INVISIBLE);
+        net.setVisibility(View.INVISIBLE);
 //        view_log.setVisibility(View.INVISIBLE);
         drawCards();
         game.processSpinOne();
@@ -229,9 +226,13 @@ public class VideoPokerPlay extends AppCompatActivity {
         int afterCredit = player.getCredit();
         CreditPreferences.setStoredCredits(this, afterCredit);
 //        credit.setText(Integer.toString(player.getCredit()));
+
         startCreditAnimation(beforeCredit, afterCredit, 2000);
-        credit.startAnimation(pulse_credit);
+
         mHandRank.startAnimation(pulse);
+        if (afterCredit > beforeCredit) {
+            credit.startAnimation(pulse_credit);
+        }
 //        game_over.startAnimation(pulse);
 //        game_over.setVisibility(View.VISIBLE);
         HandRank tempHandRank = player.getHand().getRank();
@@ -240,9 +241,21 @@ public class VideoPokerPlay extends AppCompatActivity {
 //        game_over.setText(handRankString);
         deal.setVisibility(View.VISIBLE);
         draw.setVisibility(View.INVISIBLE);
+        net.setVisibility(View.VISIBLE);
 //        view_log.setVisibility(View.VISIBLE);
         finalHandString = player.getHand().toString();
         winnings = player.getHand().getRank().getPayout();
+        if (winnings < 5) {
+            net.setTextColor(Color.RED);
+        }
+        else if (winnings > 5){
+            net.setTextColor(Color.GREEN);
+
+        }
+        else {
+            net.setTextColor(Color.BLACK);
+        }
+        net.setText(Integer.toString(winnings -5));
         gameLog.addToDb(this, dealString, finalHandString, (winnings - 5), handRankString );
     }
 

@@ -129,7 +129,18 @@
         android:layout_above="@id/deal"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:layout_toRightOf="@+id/credit"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/net"
+        android:textSize="20dp"
+        android:paddingLeft="15dp"
+        android:layout_marginBottom="25dp"
+       />
 
 
 </RelativeLayout>

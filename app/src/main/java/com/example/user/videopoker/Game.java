@@ -4,23 +4,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by user on 13/11/2016.
- *
- * GAME
-
- prepare deck
- get random hand
- give hand to player
- calculate hand
- process holds
- give new cards if holds < 5
- calculate hand
- calculate payout
- payout
- REPEAT
-
- */
 
 public class Game {
 
